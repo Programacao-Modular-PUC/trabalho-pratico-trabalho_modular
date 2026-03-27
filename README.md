@@ -4,7 +4,7 @@
 Lucas do Carmo Braz 
 
 Bruno Henrique de Aguiar Xavier 
-
+Manoel Rodrigues Bezerra Neto
 Vinícius Fernandes Mantini
 
 
