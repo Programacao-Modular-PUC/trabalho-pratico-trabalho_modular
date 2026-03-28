@@ -9,6 +9,7 @@ Manoel Rodrigues Bezerra Neto
 
 Vinícius Fernandes Mantini
 
+Arthur Monserrat Souza
 
 
 
