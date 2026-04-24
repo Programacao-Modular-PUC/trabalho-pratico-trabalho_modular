@@ -53,13 +53,8 @@ O sistema permite:
 
 ##  Tecnologias Utilizadas
 
-* Java
-* Spring Boot
-* MySQL
-* JPA / Hibernate
-* Maven ou Gradle
-* JUnit (testes)
-
+* HTML
+* CSS
 ---
 
 ##  Considerações Finais
