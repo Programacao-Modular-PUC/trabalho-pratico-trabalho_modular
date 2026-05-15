@@ -41,6 +41,13 @@ O sistema permite:
 ---
 
 
+##  Diagrama de Classes
+
+<img src="uml_class_diagram_hospedagem_updated.png">
+
+---
+
+
 ##  Equipe de Desenvolvimento
 
 * Lucas do Carmo Braz
