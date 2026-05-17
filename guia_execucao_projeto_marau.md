@@ -1,10 +1,5 @@
 # Guia de Execução — Projeto Maraú
 
-## Integrantes
-Preencha com os nomes do grupo.
-
----
-
 ## Descrição
 Sistema web para gerenciamento de hospedagens em Maraú utilizando:
 
@@ -256,7 +251,5 @@ Tabelas:
 
 Não é necessário criar tabelas manualmente.
 
----
 
-Projeto desenvolvido para fins acadêmicos.
 
