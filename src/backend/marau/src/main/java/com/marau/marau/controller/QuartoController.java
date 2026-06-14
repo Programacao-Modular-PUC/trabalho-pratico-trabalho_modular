@@ -20,7 +20,12 @@ public class QuartoController {
     }
 
     @GetMapping
-    public List<Quarto> listar() {
+    public List<Quarto> listar(@RequestParam(required = false) TipoQuarto tipo) {
+
+        if (tipo != null) {
+            return repository.findByTipo(tipo);
+        }
+
         return repository.findAll();
     }
 
