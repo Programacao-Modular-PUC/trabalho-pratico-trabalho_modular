@@ -2,6 +2,7 @@ package com.marau.marau.repository;
 
 import com.marau.marau.model.Aluguel;
 import org.springframework.data.jpa.repository.JpaRepository;
+<<<<<<< HEAD
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -24,3 +25,9 @@ public interface AluguelRepository extends JpaRepository<Aluguel, Long> {
             @Param("entrada") LocalDate entrada,
             @Param("saida") LocalDate saida);
 }
+=======
+
+public interface AluguelRepository
+        extends JpaRepository<Aluguel, Long> {
+}
+>>>>>>> 9c449a0f9abd87e899021217b631445095ed6542
