@@ -33,6 +33,19 @@ function dinheiro(valor){
     return Number(valor || 0).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
 }
 
+function nomeTarifa(tipo){
+    const nomes = {
+        PADRAO: "Padrão",
+        ALTA_TEMPORADA: "Alta temporada",
+        BAIXA_TEMPORADA: "Baixa temporada",
+        FERIADO: "Feriado",
+        EVENTO_ESPECIAL: "Evento especial",
+        PROMOCAO_TEMPORARIA: "Promoção temporária",
+        CLIENTE_FREQUENTE: "Cliente frequente"
+    };
+    return nomes[tipo] || "Padrão";
+}
+
 function mostrarMensagem(id, texto, tipo="ok"){
     const el = document.getElementById(id);
     if(!el) return;
@@ -189,10 +202,11 @@ if(formReserva){
                     imovel:{id:Number(imovelId.value)},
                     checkin: checkin.value,
                     checkout: checkout.value,
-                    quantidadeHospedes: Number(quantidadeHospedes.value)
+                    quantidadeHospedes: Number(quantidadeHospedes.value),
+                    tipoTarifa: document.getElementById("tipoTarifa")?.value || "PADRAO"
                 })
             });
-            mostrarMensagem("msg", `Reserva confirmada! Valor total: ${dinheiro(reserva.valorTotal)}`, "ok");
+            mostrarMensagem("msg", `Reserva confirmada! Tarifa: ${nomeTarifa(reserva.tipoTarifa)}. Valor total: ${dinheiro(reserva.valorTotal)}`, "ok");
         }catch(err){ mostrarMensagem("msg", err.message, "error"); }
     });
 }
@@ -256,8 +270,8 @@ function renderTabelaReservas(reservas){
     const tbody = document.getElementById("tabelaReservas");
     if(!tbody) return;
     tbody.innerHTML = reservas.length ? reservas.map(r => `
-        <tr><td>${r.imovel?.titulo || '-'}</td><td>${r.checkin}</td><td>${r.checkout}</td><td>${r.quantidadeHospedes}</td><td>${dinheiro(r.valorTotal)}</td><td><span class="badge">${r.status}</span></td><td>${r.status !== "CANCELADA" ? `<button class="btn btn-small" onclick="cancelarReserva(${r.id})">Cancelar</button>` : "-"}</td></tr>
-    `).join("") : `<tr><td colspan="7">Nenhuma reserva encontrada.</td></tr>`;
+        <tr><td>${r.imovel?.titulo || '-'}</td><td>${r.checkin}</td><td>${r.checkout}</td><td>${r.quantidadeHospedes}</td><td>${nomeTarifa(r.tipoTarifa)}</td><td>${dinheiro(r.valorTotal)}</td><td><span class="badge">${r.status}</span></td><td>${r.status !== "CANCELADA" ? `<button class="btn btn-small" onclick="cancelarReserva(${r.id})">Cancelar</button>` : "-"}</td></tr>
+    `).join("") : `<tr><td colspan="8">Nenhuma reserva encontrada.</td></tr>`;
 }
 function renderMeusImoveis(imoveis){
     const tbody = document.getElementById("tabelaImoveis");

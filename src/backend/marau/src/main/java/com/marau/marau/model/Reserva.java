@@ -1,9 +1,11 @@
 package com.marau.marau.model;
 
 import com.marau.marau.enums.StatusReserva;
+import com.marau.marau.enums.TipoTarifa;
+import com.marau.marau.tarifa.ContextoTarifa;
+import com.marau.marau.tarifa.GerenciadorTarifas;
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "reservas")
@@ -27,12 +29,19 @@ public class Reserva {
     @Enumerated(EnumType.STRING)
     private StatusReserva status = StatusReserva.CONFIRMADA;
 
+    @Enumerated(EnumType.STRING)
+    private TipoTarifa tipoTarifa = TipoTarifa.PADRAO;
+
     public Reserva() {}
 
     public void calcularValorTotal() {
-        long dias = ChronoUnit.DAYS.between(checkin, checkout);
-        if (dias < 1) dias = 1;
-        this.valorTotal = dias * imovel.getPrecoNoite();
+        ContextoTarifa contexto = new ContextoTarifa(
+                imovel.getPrecoNoite(),
+                checkin,
+                checkout,
+                tipoTarifa);
+
+        this.valorTotal = GerenciadorTarifas.getInstance().calcularValorTotal(contexto);
     }
 
     public Long getId() { return id; }
@@ -47,6 +56,9 @@ public class Reserva {
     public int getQuantidadeHospedes() { return quantidadeHospedes; }
     public void setQuantidadeHospedes(int quantidadeHospedes) { this.quantidadeHospedes = quantidadeHospedes; }
     public double getValorTotal() { return valorTotal; }
+    public void setValorTotal(double valorTotal) { this.valorTotal = valorTotal; }
     public StatusReserva getStatus() { return status; }
     public void setStatus(StatusReserva status) { this.status = status; }
+    public TipoTarifa getTipoTarifa() { return tipoTarifa; }
+    public void setTipoTarifa(TipoTarifa tipoTarifa) { this.tipoTarifa = tipoTarifa == null ? TipoTarifa.PADRAO : tipoTarifa; }
 }

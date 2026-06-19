@@ -2,8 +2,11 @@ package com.marau.marau;
 
 import com.marau.marau.repository.AluguelRepository;
 import com.marau.marau.repository.ClienteRepository;
+import com.marau.marau.repository.ImovelRepository;
 import com.marau.marau.repository.QuartoRepository;
+import com.marau.marau.repository.ReservaRepository;
 import com.marau.marau.repository.ResidenciaRepository;
+import com.marau.marau.repository.UsuarioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -48,6 +51,21 @@ class MarauApplicationTests {
 		@Bean
 		ResidenciaRepository residenciaRepository() {
 			return criarRepositorio(ResidenciaRepository.class);
+		}
+
+		@Bean
+		ImovelRepository imovelRepository() {
+			return criarRepositorio(ImovelRepository.class);
+		}
+
+		@Bean
+		ReservaRepository reservaRepository() {
+			return criarRepositorio(ReservaRepository.class);
+		}
+
+		@Bean
+		UsuarioRepository usuarioRepository() {
+			return criarRepositorio(UsuarioRepository.class);
 		}
 
 		private <T> T criarRepositorio(Class<T> tipoRepositorio) {

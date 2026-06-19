@@ -1,73 +1,75 @@
-# 🏝️ Sistema de Hospedagem – Maraú/BA
+# Sistema de Hospedagem - Maraú Stay
 
-##  Descrição do Projeto
+## Descrição do Projeto
 
-Este projeto consiste no desenvolvimento de um **Sistema de Gerenciamento de Hospedagens** voltado para a região de **Maraú – BA**, um importante destino turístico brasileiro conhecido por suas belezas naturais, como praias, piscinas naturais, manguezais e trilhas ecológicas.
+Este projeto consiste no desenvolvimento de um Sistema de Gerenciamento de Hospedagens voltado para a região de Maraú, na Bahia.
 
-Com o crescimento do turismo local, moradores passaram a oferecer quartos para hospedagem. O sistema tem como objetivo organizar esse processo de forma **eficiente, escalável e automatizada**, utilizando uma arquitetura moderna baseada em **API REST**.
+O sistema organiza o cadastro de imóveis, reservas, usuários e hospedagens, usando uma arquitetura baseada em API REST.
 
----
+## Objetivo
 
-##  Objetivo
+Desenvolver um sistema completo que contemple:
 
-Desenvolver um sistema completo ao longo do semestre que contemple:
+- Programação orientada a objetos.
+- Arquitetura em camadas: Controller, Service, Repository e Model.
+- API REST com Spring Boot.
+- Persistência de dados com MySQL.
+- Testes automatizados.
+- Tratamento de exceções.
+- Aplicação de padrões de projeto.
 
-* Programação Orientada a Objetos (POO)
-* Arquitetura em camadas:
+## Funcionalidades do Sistema
 
-  * Controller
-  * Service
-  * Repository
-  * Model
-* API REST com **Spring Boot**
-* Persistência de dados com **MySQL**
-* Testes automatizados
-* Aplicação de padrões de projeto
+- Cadastro e autenticação de usuários.
+- Cadastro de imóveis.
+- Listagem e busca de hospedagens.
+- Realização de reservas.
+- Cálculo automático do valor total da reserva.
+- Sistema de tarifação flexível.
+- Histórico de reservas.
+- Cancelamento de reservas e aluguéis.
+- Controle de quartos e regras de hospedagem.
 
----
+## Sprint de Padrões de Projeto
 
-##  Funcionalidades do Sistema
+A funcionalidade de tarifação flexível foi implementada usando:
 
-O sistema permite:
+- Strategy, para separar as regras de cálculo de tarifa.
+- Singleton, para manter um gerenciador global único de tarifas.
 
-*  Gerenciamento de residências e quartos
-*  Cadastro e autenticação de clientes
-*  Realização de reservas e aluguéis
-*  Cálculo automático de diárias
-*  Emissão de recibos
-*  Controle de disponibilidade de quartos
-*  Histórico de hospedagens
+A documentação completa da solução, com problema identificado, justificativa dos padrões, diagrama de classes atualizado e exemplos de demonstração, está em:
 
----
+[SPRINT_TARIFACAO_FLEXIVEL.md](SPRINT_TARIFACAO_FLEXIVEL.md)
 
+## Diagrama de Classes
 
-##  Diagrama de Classes
+A versão anterior do diagrama está no arquivo:
 
-<img src="uml_class_diagram_hospedagem_updated.png">
+![Diagrama de classes](uml_class_diagram_hospedagem_updated.png)
 
----
+O diagrama atualizado da funcionalidade de tarifação flexível está documentado em Mermaid no arquivo da sprint.
 
+## Tecnologias Utilizadas
 
-##  Equipe de Desenvolvimento
+- Java
+- Spring Boot
+- Spring Data JPA
+- MySQL
+- JUnit
+- HTML
+- CSS
+- JavaScript
 
-* Lucas do Carmo Braz
-* Bruno Henrique de Aguiar Xavier
-* Manoel Rodrigues Bezerra Neto
-* Vinícius Fernandes Mantini
-* Arthur Monserrat Souza
+## Equipe de Desenvolvimento
 
----
+- Lucas do Carmo Braz
+- Bruno Henrique de Aguiar Xavier
+- Manoel Rodrigues Bezerra Neto
+- Vinícius Fernandes Mantini
+- Arthur Monserrat Souza
 
-##  Tecnologias Utilizadas
+## Considerações Finais
 
-* HTML
-* CSS
----
+Este projeto aplica conceitos fundamentais e avançados de desenvolvimento de software, promovendo a construção de um sistema realista e alinhado com demandas do setor turístico.
 
-##  Considerações Finais
-
-Este projeto visa aplicar conceitos fundamentais e avançados de desenvolvimento de software, promovendo a construção de um sistema realista e alinhado com demandas do setor turístico.
-
-Além disso, contribui para a valorização do turismo local e a organização dos serviços de hospedagem em regiões de grande potencial como Maraú.
-
----
+Além disso, contribui para a valorização do turismo local e para a organização dos serviços de hospedagem em regiões de grande potencial como Maraú.

@@ -1,5 +1,6 @@
 package com.marau.marau.service;
 
+import com.marau.marau.enums.TipoTarifa;
 import com.marau.marau.enums.TipoQuarto;
 import com.marau.marau.exception.CapacidadeExcedidaException;
 import com.marau.marau.exception.DataInvalidaException;
@@ -8,10 +9,11 @@ import com.marau.marau.exception.RecursoNaoPermitidoException;
 import com.marau.marau.model.Aluguel;
 import com.marau.marau.model.Quarto;
 import com.marau.marau.repository.AluguelRepository;
+import com.marau.marau.tarifa.ContextoTarifa;
+import com.marau.marau.tarifa.GerenciadorTarifas;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 @Service
 public class HospedagemService {
@@ -104,9 +106,24 @@ public class HospedagemService {
     }
 
     public double calcularValorTotal(Quarto quarto, LocalDate entrada, LocalDate saida) {
+        return calcularValorTotal(quarto, entrada, saida, TipoTarifa.PADRAO);
+    }
+
+    public double calcularValorTotal(
+            Quarto quarto,
+            LocalDate entrada,
+            LocalDate saida,
+            TipoTarifa tipoTarifa) {
+
         validarDatas(entrada, saida);
-        long dias = ChronoUnit.DAYS.between(entrada, saida);
-        return dias * quarto.getValorBase();
+
+        ContextoTarifa contexto = new ContextoTarifa(
+                quarto.getValorBase(),
+                entrada,
+                saida,
+                tipoTarifa);
+
+        return GerenciadorTarifas.getInstance().calcularValorTotal(contexto);
     }
 
     private void validarQuarto(Quarto quarto) {

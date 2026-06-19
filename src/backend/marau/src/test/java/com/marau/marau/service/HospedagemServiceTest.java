@@ -1,5 +1,6 @@
 package com.marau.marau.service;
 
+import com.marau.marau.enums.TipoTarifa;
 import com.marau.marau.enums.TipoQuarto;
 import com.marau.marau.exception.CapacidadeExcedidaException;
 import com.marau.marau.exception.DataInvalidaException;
@@ -105,5 +106,37 @@ class HospedagemServiceTest {
         when(aluguelRepository.existsAluguelAtivoNoPeriodo(1L, entrada, saida)).thenReturn(false);
 
         assertDoesNotThrow(() -> service.validarDisponibilidade(1L, entrada, saida));
+    }
+
+    @Test
+    void deveCalcularValorTotalComTarifaAltaTemporada() {
+        Quarto quarto = new Quarto();
+        quarto.setValorBase(200);
+        LocalDate entrada = LocalDate.of(2026, 12, 20);
+        LocalDate saida = LocalDate.of(2026, 12, 25);
+
+        double valorTotal = service.calcularValorTotal(
+                quarto,
+                entrada,
+                saida,
+                TipoTarifa.ALTA_TEMPORADA);
+
+        assertEquals(1300, valorTotal);
+    }
+
+    @Test
+    void deveCalcularValorTotalComDescontoDeClienteFrequente() {
+        Quarto quarto = new Quarto();
+        quarto.setValorBase(300);
+        LocalDate entrada = LocalDate.of(2026, 8, 10);
+        LocalDate saida = LocalDate.of(2026, 8, 12);
+
+        double valorTotal = service.calcularValorTotal(
+                quarto,
+                entrada,
+                saida,
+                TipoTarifa.CLIENTE_FREQUENTE);
+
+        assertEquals(540, valorTotal);
     }
 }

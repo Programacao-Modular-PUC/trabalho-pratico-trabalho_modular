@@ -1,226 +1,84 @@
-<<<<<<< HEAD
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maraú Stay</title><link rel="stylesheet" href="../css/style.css"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"></head><body><nav class="navbar"><a class="logo" href="index.html"><i class="fa-solid fa-house-chimney-window"></i> Maraú Stay</a><ul class="nav-links"><li><a href="index.html">Início</a></li><li><a href="hospedagem.html">Hospedagens</a></li><li><a href="cadastrar-imovel.html">Anunciar imóvel</a></li><li><a href="sobre.html">Sobre</a></li><li><a href="contato.html">Contato</a></li></ul><div class="user-area" id="userArea"></div></nav><section class="hero"><div class="hero-content"><h1>Reserve casas, apartamentos e experiências em Maraú</h1><p>Um sistema completo estilo Airbnb para cadastrar imóveis, fazer reservas e gerenciar hospedagens.</p><div class="hero-buttons"><a class="btn" href="hospedagem.html">Ver hospedagens</a><a class="btn btn-secondary" href="cadastrar-imovel.html">Anunciar imóvel</a></div></div></section><form class="search-panel" id="formBusca"><input class="form-control" id="buscaCidade" placeholder="Para onde você vai? Ex: Maraú"><input class="form-control" type="date"><input class="form-control" type="number" min="1" placeholder="Hóspedes"><button class="btn" type="submit">Buscar</button></form><section class="stats"><div class="stat"><h2>100%</h2><p>Back-end Java</p></div><div class="stat"><h2>SQL</h2><p>Dados no banco</p></div><div class="stat"><h2>CRUD</h2><p>Imóveis e reservas</p></div></section><section class="container"><div class="section-title"><div><h2>Hospedagens em destaque</h2><p>Dados carregados diretamente do back-end.</p></div><a class="btn btn-secondary" href="hospedagem.html">Ver todas</a></div><div class="gallery" id="imoveisContainer"></div></section><section class="benefits"><h2>Funções principais adicionadas</h2><div class="benefits-grid"><div class="benefit-card"><i class="fa-solid fa-user-lock"></i><h3>Login e cadastro</h3><p>Usuários podem entrar e usar o painel.</p></div><div class="benefit-card"><i class="fa-solid fa-building"></i><h3>Cadastro de imóveis</h3><p>Anfitriões cadastram apartamentos, casas e pousadas.</p></div><div class="benefit-card"><i class="fa-solid fa-calendar-check"></i><h3>Reserva</h3><p>O valor total é calculado pelo back-end.</p></div></div></section><footer><p>© 2026 - Maraú Stay | Sistema de hospedagens com Java + SQL</p></footer><script src="../js/app.js"></script></body></html>
-=======
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Descubra Maraú</title>
-
-<link rel="stylesheet" href="../css/style.css">
-
-<link
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-rel="stylesheet"
-/>
-
-<script defer src="../js/script.js"></script>
-<script defer src="../js/api.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maraú Stay</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
-<div class="loader"></div>
-
-<header>
-
 <nav class="navbar">
-
-<div class="logo">
-    <i class="fa-solid fa-water"></i>
-    Maraú
-</div>
-
-<ul class="nav-links">
-    <li><a href="index.html">Início</a></li>
-    <li><a href="sobre.html">Sobre</a></li>
-    <li><a href="hospedagem.html">Hospedagem</a></li>
-    <li><a href="contato.html">Contato</a></li>
-</ul>
-
-<div class="actions">
-    <button id="themeToggle">
-        <i class="fa-solid fa-moon"></i>
-    </button>
-
-    <div class="menu-mobile">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-</div>
-
+    <a class="logo" href="index.html"><i class="fa-solid fa-house-chimney-window"></i> Maraú Stay</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="hospedagem.html">Hospedagens</a></li>
+        <li><a href="cadastrar-imovel.html">Anunciar imóvel</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <div class="user-area" id="userArea"></div>
 </nav>
 
 <section class="hero">
-
-<div class="overlay"></div>
-
-<div class="hero-content">
-
-<h1>Descubra o Paraíso em Maraú</h1>
-
-<p>
-Praias cristalinas, natureza preservada,
-aventuras ecológicas e experiências inesquecíveis.
-</p>
-
-<div class="hero-buttons">
-    <a href="sobre.html" class="btn">Explorar</a>
-    <a href="contato.html" class="btn btn-secondary">Contato</a>
-</div>
-
-</div>
-
+    <div class="hero-content">
+        <h1>Reserve casas, apartamentos e experiências em Maraú</h1>
+        <p>Um sistema completo estilo Airbnb para cadastrar imóveis, fazer reservas e gerenciar hospedagens.</p>
+        <div class="hero-buttons">
+            <a class="btn" href="hospedagem.html">Ver hospedagens</a>
+            <a class="btn btn-secondary" href="cadastrar-imovel.html">Anunciar imóvel</a>
+        </div>
+    </div>
 </section>
 
-</header>
+<form class="search-panel" id="formBusca">
+    <input class="form-control" id="buscaCidade" placeholder="Para onde você vai? Ex: Maraú">
+    <input class="form-control" type="date">
+    <input class="form-control" type="number" min="1" placeholder="Hóspedes">
+    <button class="btn" type="submit">Buscar</button>
+</form>
 
 <section class="stats">
-
-<div class="stat">
-    <h2>+50</h2>
-    <p>Praias</p>
-</div>
-
-<div class="stat">
-    <h2>+20k</h2>
-    <p>Turistas</p>
-</div>
-
-<div class="stat">
-    <h2>100%</h2>
-    <p>Natureza</p>
-</div>
-
+    <div class="stat"><h2>100%</h2><p>Back-end Java</p></div>
+    <div class="stat"><h2>SQL</h2><p>Dados no banco</p></div>
+    <div class="stat"><h2>CRUD</h2><p>Imóveis e reservas</p></div>
 </section>
 
 <section class="container">
-
-<div class="section-title">
-    <h2>Belezas Naturais</h2>
-    <p>Explore os melhores lugares de Maraú</p>
-</div>
-
-<div class="search-box">
-    <input type="text" id="searchInput" placeholder="Pesquisar...">
-</div>
-
-<div class="gallery">
-
-<div class="card">
-<img src="https://preview.redd.it/pen%C3%ADnsula-de-mara%C3%BA-um-para%C3%ADso-tropical-no-sul-da-bahia-v0-erc3xfd7ycxb1.jpg?width=800&format=pjpg&auto=webp&s=ca915cec6448c994148077ba0d11ee2e21eab34b">
-<div class="card-content">
-<h3>Praias Paradisíacas</h3>
-<p>Águas cristalinas e areia branca.</p>
-<div class="rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://imgmd.net/images/v1/guia/1684025/barragrandemarau-222-c.jpg">
-<div class="card-content">
-<h3>Mar Cristalino</h3>
-<p>Um espetáculo natural inesquecível.</p>
-<div class="rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star-half"></i>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://nossoblogdeviagem.com.br/wp-content/uploads/2021/01/IMG_2636.jpg">
-<div class="card-content">
-<h3>Trilhas</h3>
-<p>Aventura e ecoturismo.</p>
-<div class="rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-</div>
-</div>
-</div>
-
-</div>
-
+    <div class="section-title">
+        <div>
+            <h2>Hospedagens em destaque</h2>
+            <p>Dados carregados diretamente do back-end.</p>
+        </div>
+        <a class="btn btn-secondary" href="hospedagem.html">Ver todas</a>
+    </div>
+    <div class="gallery" id="imoveisContainer"></div>
 </section>
 
-<section class="faq">
-
-<h2>Perguntas Frequentes</h2>
-
-<div class="faq-item">
-<button class="faq-question">
-Qual melhor época para visitar?
-</button>
-
-<div class="faq-answer">
-<p>
-Entre setembro e março.
-</p>
-</div>
-</div>
-
-<div class="faq-item">
-<button class="faq-question">
-Maraú possui passeios?
-</button>
-
-<div class="faq-answer">
-<p>
-Sim! Trilhas, mergulho, piscinas naturais e muito mais.
-</p>
-</div>
-</div>
-
+<section class="benefits">
+    <h2>Funções principais adicionadas</h2>
+    <div class="benefits-grid">
+        <div class="benefit-card">
+            <i class="fa-solid fa-user-lock"></i>
+            <h3>Login e cadastro</h3>
+            <p>Usuários podem entrar e usar o painel.</p>
+        </div>
+        <div class="benefit-card">
+            <i class="fa-solid fa-building"></i>
+            <h3>Cadastro de imóveis</h3>
+            <p>Anfitriões cadastram apartamentos, casas e pousadas.</p>
+        </div>
+        <div class="benefit-card">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Reserva</h3>
+            <p>O valor total é calculado pelo back-end com tarifa flexível.</p>
+        </div>
+    </div>
 </section>
 
 <footer>
-
-<div class="footer-content">
-
-<div>
-<h3>Maraú</h3>
-<p>O paraíso da Bahia.</p>
-</div>
-
-<div>
-<h3>Links</h3>
-<a href="index.html">Início</a>
-<a href="sobre.html">Sobre</a>
-<a href="hospedagem.html">Hospedagem</a>
-</div>
-
-<div>
-<h3>Redes</h3>
-
-<div class="socials">
-<i class="fab fa-instagram"></i>
-<i class="fab fa-facebook"></i>
-<i class="fab fa-youtube"></i>
-</div>
-
-</div>
-
-</div>
-
-<p class="copy">
-© 2026 - Todos os direitos reservados.
-</p>
-
+    <p>© 2026 - Maraú Stay | Sistema de hospedagens com Java + SQL</p>
 </footer>
-
+<script src="../js/app.js"></script>
 </body>
 </html>
->>>>>>> 9c449a0f9abd87e899021217b631445095ed6542

@@ -18,11 +18,7 @@ class QuartoControllerTest {
     void deveListarTodosOsQuartosQuandoTipoNaoForInformado() {
 
         RepositorioQuartoFake repository = new RepositorioQuartoFake();
-<<<<<<< HEAD
         QuartoController controller = new QuartoController(repository.criarProxy(), null);
-=======
-        QuartoController controller = new QuartoController(repository.criarProxy());
->>>>>>> 9c449a0f9abd87e899021217b631445095ed6542
         List<Quarto> quartosEsperados = List.of(
                 criarQuarto(TipoQuarto.INDIVIDUAL),
                 criarQuarto(TipoQuarto.FAMILIA));
@@ -40,11 +36,7 @@ class QuartoControllerTest {
     void deveListarQuartosFiltradosQuandoTipoForInformado() {
 
         RepositorioQuartoFake repository = new RepositorioQuartoFake();
-<<<<<<< HEAD
         QuartoController controller = new QuartoController(repository.criarProxy(), null);
-=======
-        QuartoController controller = new QuartoController(repository.criarProxy());
->>>>>>> 9c449a0f9abd87e899021217b631445095ed6542
         List<Quarto> quartosEsperados = List.of(
                 criarQuarto(TipoQuarto.FAMILIA));
 

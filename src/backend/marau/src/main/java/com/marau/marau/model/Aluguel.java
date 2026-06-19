@@ -1,9 +1,11 @@
 package com.marau.marau.model;
 
+import com.marau.marau.enums.TipoTarifa;
+import com.marau.marau.tarifa.ContextoTarifa;
+import com.marau.marau.tarifa.GerenciadorTarifas;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "alugueis")
@@ -20,17 +22,13 @@ public class Aluguel {
     private Quarto quarto;
 
     private LocalDate dataEntrada;
-<<<<<<< HEAD
     private LocalDate dataSaida;
     private int quantidadeHospedes;
     private double valorTotal;
     private String status = "CONFIRMADO";
-=======
 
-    private LocalDate dataSaida;
-
-    private double valorTotal;
->>>>>>> 9c449a0f9abd87e899021217b631445095ed6542
+    @Enumerated(EnumType.STRING)
+    private TipoTarifa tipoTarifa = TipoTarifa.PADRAO;
 
     public Aluguel() {
     }
@@ -71,7 +69,6 @@ public class Aluguel {
         this.dataSaida = dataSaida;
     }
 
-<<<<<<< HEAD
     public int getQuantidadeHospedes() {
         return quantidadeHospedes;
     }
@@ -80,13 +77,10 @@ public class Aluguel {
         this.quantidadeHospedes = quantidadeHospedes;
     }
 
-=======
->>>>>>> 9c449a0f9abd87e899021217b631445095ed6542
     public double getValorTotal() {
         return valorTotal;
     }
 
-<<<<<<< HEAD
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
@@ -99,21 +93,21 @@ public class Aluguel {
         this.status = status;
     }
 
+    public TipoTarifa getTipoTarifa() {
+        return tipoTarifa;
+    }
+
+    public void setTipoTarifa(TipoTarifa tipoTarifa) {
+        this.tipoTarifa = tipoTarifa == null ? TipoTarifa.PADRAO : tipoTarifa;
+    }
+
     public void calcularValorTotal() {
-        long dias = ChronoUnit.DAYS.between(dataEntrada, dataSaida);
-        this.valorTotal = dias * quarto.getValorBase();
+        ContextoTarifa contexto = new ContextoTarifa(
+                quarto.getValorBase(),
+                dataEntrada,
+                dataSaida,
+                tipoTarifa);
+
+        this.valorTotal = GerenciadorTarifas.getInstance().calcularValorTotal(contexto);
     }
 }
-=======
-    public void calcularValorTotal() {
-
-        long dias =
-                ChronoUnit.DAYS.between(
-                        dataEntrada,
-                        dataSaida);
-
-        this.valorTotal =
-                dias * quarto.getValorBase();
-    }
-}
->>>>>>> 9c449a0f9abd87e899021217b631445095ed6542
