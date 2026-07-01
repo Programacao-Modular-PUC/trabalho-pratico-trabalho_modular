@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacotes de hospedagem</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar">
+    <a class="logo" href="index.html"><i class="fa-solid fa-house-chimney-window"></i> Maraú Stay</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="hospedagem.html">Hospedagens</a></li>
+        <li><a href="cadastrar-imovel.html">Anunciar imóvel</a></li>
+        <li><a href="pacotes.html">Pacotes</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <div class="user-area" id="userArea"></div>
+</nav>
+
+<section class="page-hero">
+    <div>
+        <h1>Pacotes de hospedagem</h1>
+        <p>Combine café da manhã, passeios, transporte, lavanderia e traslado.</p>
+    </div>
+</section>
+
+<section class="container">
+    <div class="section-title">
+        <div>
+            <h2>Monte seu pacote</h2>
+            <p>Escolha um modelo pronto ou personalize os serviços adicionais.</p>
+        </div>
+    </div>
+
+    <form class="table-card package-form" id="formPacote">
+        <div id="msgPacote"></div>
+        <div class="form-grid">
+            <input class="form-control" id="valorHospedagemBase" type="number" step="0.01" min="1" placeholder="Valor base da hospedagem" required>
+            <select class="form-control" id="tipoPacote">
+                <option value="ECONOMICO">Pacote Econômico</option>
+                <option value="FAMILIA">Pacote Família</option>
+                <option value="PREMIUM">Pacote Premium</option>
+                <option value="PERSONALIZADO">Pacote Personalizado</option>
+            </select>
+        </div>
+
+        <h3 class="package-subtitle">Serviços do pacote personalizado</h3>
+        <p class="package-help">Os serviços abaixo são usados quando o tipo escolhido for Personalizado.</p>
+        <div class="service-options" id="servicosPacote"></div>
+
+        <button class="btn" type="submit">Simular pacote</button>
+    </form>
+
+    <div class="package-result" id="resultadoPacote"></div>
+</section>
+
+<section class="benefits">
+    <h2>Modelos disponíveis</h2>
+    <div class="benefits-grid" id="modelosPacote"></div>
+</section>
+
+<footer>
+    <p>© 2026 - Maraú Stay | Hospedagens e experiências em Maraú</p>
+</footer>
+<script src="../js/app.js"></script>
+</body>
+</html>

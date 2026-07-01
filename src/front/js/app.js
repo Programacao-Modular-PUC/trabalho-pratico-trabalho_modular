@@ -53,6 +53,36 @@ function mostrarMensagem(id, texto, tipo="ok"){
     el.textContent = texto;
 }
 
+function lerArquivoComoBase64(arquivo){
+    return new Promise((resolve, reject) => {
+        if(!arquivo){
+            resolve("");
+            return;
+        }
+
+        const leitor = new FileReader();
+        leitor.onload = () => resolve(leitor.result);
+        leitor.onerror = () => reject(new Error("Não foi possível ler a imagem."));
+        leitor.readAsDataURL(arquivo);
+    });
+}
+
+const imagemArquivoInput = document.getElementById("imagemArquivo");
+if(imagemArquivoInput){
+    imagemArquivoInput.addEventListener("change", async () => {
+        const arquivo = imagemArquivoInput.files[0];
+        const preview = document.getElementById("previewImagem");
+        if(!arquivo || !preview) return;
+
+        try{
+            preview.src = await lerArquivoComoBase64(arquivo);
+            preview.style.display = "block";
+        }catch(err){
+            mostrarMensagem("msg", err.message, "error");
+        }
+    });
+}
+
 async function request(url, options={}){
     const resp = await fetch(API_URL + url, {
         headers:{"Content-Type":"application/json"},
@@ -132,7 +162,7 @@ async function carregarImoveis(){
         }
         container.innerHTML = imoveis.map(imovel => cardImovel(imovel)).join("");
     }catch(err){
-        container.innerHTML = `<div class="empty">Erro ao carregar imóveis. Confira se o back-end Java está rodando.</div>`;
+        container.innerHTML = `<div class="empty">Erro ao carregar imóveis. Confira se o sistema está rodando.</div>`;
     }
 }
 
@@ -218,6 +248,9 @@ if(formImovel){
         e.preventDefault();
         const user = usuarioLogado();
         try{
+            const arquivoImagem = document.getElementById("imagemArquivo")?.files[0];
+            const imagemFinal = arquivoImagem ? await lerArquivoComoBase64(arquivoImagem) : imagemUrl.value;
+
             await request("/imoveis", {
                 method:"POST",
                 body: JSON.stringify({
@@ -226,7 +259,7 @@ if(formImovel){
                     cidade: cidade.value,
                     bairro: bairro.value,
                     endereco: endereco.value,
-                    imagemUrl: imagemUrl.value,
+                    imagemUrl: imagemFinal,
                     tipo: tipoImovel.value,
                     quartos: Number(quartos.value),
                     banheiros: Number(banheiros.value),
@@ -241,8 +274,13 @@ if(formImovel){
                     anfitriao:{id:user.id}
                 })
             });
-            mostrarMensagem("msg", "Imóvel cadastrado com sucesso!", "ok");
+            mostrarMensagem("msg", "Imóvel cadastrado com sucesso! Foto salva no banco de dados.", "ok");
             formImovel.reset();
+            const preview = document.getElementById("previewImagem");
+            if(preview){
+                preview.src = "";
+                preview.style.display = "none";
+            }
         }catch(err){ mostrarMensagem("msg", err.message, "error"); }
     });
 }
@@ -291,3 +329,93 @@ async function cancelarReserva(id){
         alert(err.message);
     }
 }
+
+
+async function carregarPacotesHospedagem(){
+    const servicosBox = document.getElementById("servicosPacote");
+    const modelosBox = document.getElementById("modelosPacote");
+    if(!servicosBox && !modelosBox) return;
+
+    try{
+        const dados = await request("/pacotes/modelos");
+
+        if(servicosBox){
+            servicosBox.innerHTML = dados.servicosDisponiveis.map(servico => `
+                <label class="service-option">
+                    <input type="checkbox" value="${servico.tipo}">
+                    <span><strong>${servico.nome}</strong><small>${servico.descricao} ${dinheiro(servico.valor)}</small></span>
+                </label>
+            `).join("");
+        }
+
+        if(modelosBox){
+            modelosBox.innerHTML = dados.modelos.map(modelo => `
+                <div class="benefit-card">
+                    <i class="fa-solid fa-suitcase-rolling"></i>
+                    <h3>${modelo.nome}</h3>
+                    <p>${modelo.servicos.length ? modelo.servicos.join(", ") : "Escolha livre dos serviços."}</p>
+                </div>
+            `).join("");
+        }
+
+        atualizarEstadoServicosPacote();
+    }catch(err){
+        if(servicosBox){
+            servicosBox.innerHTML = `<div class="empty">Não foi possível carregar os serviços.</div>`;
+        }
+    }
+}
+
+function atualizarEstadoServicosPacote(){
+    const tipo = document.getElementById("tipoPacote");
+    const servicosBox = document.getElementById("servicosPacote");
+    if(!tipo || !servicosBox) return;
+
+    const personalizado = tipo.value === "PERSONALIZADO";
+    servicosBox.classList.toggle("disabled", !personalizado);
+    servicosBox.querySelectorAll("input").forEach(input => {
+        input.disabled = !personalizado;
+        if(!personalizado) input.checked = false;
+    });
+}
+
+const tipoPacoteSelect = document.getElementById("tipoPacote");
+if(tipoPacoteSelect){
+    tipoPacoteSelect.addEventListener("change", atualizarEstadoServicosPacote);
+}
+
+const formPacote = document.getElementById("formPacote");
+if(formPacote){
+    formPacote.addEventListener("submit", async e => {
+        e.preventDefault();
+        const servicos = [...document.querySelectorAll("#servicosPacote input:checked")].map(input => input.value);
+        const resultadoBox = document.getElementById("resultadoPacote");
+
+        try{
+            const resultado = await request("/pacotes/simular", {
+                method: "POST",
+                body: JSON.stringify({
+                    valorHospedagemBase: Number(document.getElementById("valorHospedagemBase").value),
+                    tipoPacote: document.getElementById("tipoPacote").value,
+                    servicosAdicionais: servicos
+                })
+            });
+
+            resultadoBox.innerHTML = `
+                <div class="table-card">
+                    <h2>Resultado da simulação</h2>
+                    <p><strong>Hospedagem:</strong> ${dinheiro(resultado.valorHospedagem)}</p>
+                    <p><strong>Serviços adicionais:</strong> ${dinheiro(resultado.valorServicos)}</p>
+                    <p class="price"><strong>Total:</strong> ${dinheiro(resultado.valorTotal)}</p>
+                    <p><strong>Serviços:</strong> ${resultado.descricoesServicos.length ? resultado.descricoesServicos.join(", ") : "Nenhum serviço adicional."}</p>
+                </div>
+            `;
+            mostrarMensagem("msgPacote", "Pacote simulado com sucesso!", "ok");
+        }catch(err){
+            mostrarMensagem("msgPacote", err.message, "error");
+            resultadoBox.innerHTML = "";
+        }
+    });
+}
+
+carregarPacotesHospedagem();

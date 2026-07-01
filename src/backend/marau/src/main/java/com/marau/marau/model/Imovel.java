@@ -15,6 +15,8 @@ public class Imovel {
     private String cidade;
     private String bairro;
     private String endereco;
+    @Lob
+    @Column(name = "imagem_url", columnDefinition = "LONGTEXT")
     private String imagemUrl;
     private String tipo;
     private int quartos;
